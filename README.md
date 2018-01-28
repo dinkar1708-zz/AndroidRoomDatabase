@@ -15,3 +15,9 @@ There are 3 major components in Room:
 
 
 # Screen shots
+
+![device-2018-01-25-202154](https://user-images.githubusercontent.com/28217318/35485232-a43a6d02-0482-11e8-84f8-8dbc2773d90b.png)
+
+![device-2018-01-25-202231](https://user-images.githubusercontent.com/28217318/35485233-a4647a48-0482-11e8-8742-8e0167137e5f.png)
+
+![device-2018-01-25-202311](https://user-images.githubusercontent.com/28217318/35485234-a48ee472-0482-11e8-9a20-4209dec75dcb.png)
