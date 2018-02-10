@@ -6,12 +6,12 @@ There are 3 major components in Room:
 2. Entity
 3. Dao
 
-# In existing project - uses of room data base has been shown
- Users saved in data base is shown
- Users can be added from UI
+# In existing project - 
+Very basic usages and setup of room data base has been shown via user example.
 
 Basic crucks-
 *. Setup of data base
+
 AppDatabase - create db
 @Database(entities = {User.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
@@ -20,17 +20,20 @@ appDatabase = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, "database-name").build();
 
 *. UserDao - interface to provide access on db-
+
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> getAll();
   
 //init service
+
 *. Initilize service where you want to use room db- 
 private UserServiceImpl userService;
 userService = new UserServiceImpl(LoginActivity.this);
 
 *. From do in background save objects in db
+
                 User user = new User();
                 user.setUid(new Random().nextInt());
                 user.setEmail(mEmail);
@@ -41,6 +44,7 @@ userService = new UserServiceImpl(LoginActivity.this);
                 users = userService.getAll();
                 
 *. Simple method to get db in background thread and showing data on UI-
+
  private void getUsersFromDB() {
         new AsyncTask<Void, Void, Void>() {
             @Override
