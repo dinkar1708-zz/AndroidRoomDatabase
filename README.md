@@ -1,5 +1,5 @@
 # Saving Data Using the Room Persistence Library
-# Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
 
 There are 3 major components in Room:
 1. Database
@@ -7,10 +7,55 @@ There are 3 major components in Room:
 3. Dao
 
 # In existing project - uses of room data base has been shown
-# Users saved in data base is shown
-# Users can be added from UI
+ Users saved in data base is shown
+ Users can be added from UI
 
+Basic crucks-
+*. Setup of data base
+AppDatabase - create db
+@Database(entities = {User.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
 
+appDatabase = Room.databaseBuilder(context.getApplicationContext(),
+                    AppDatabase.class, "database-name").build();
+
+*. UserDao - interface to provide access on db-
+@Dao
+public interface UserDao {
+    @Query("SELECT * FROM user")
+    List<User> getAll();
+  
+//init service
+*. Initilize service where you want to use room db- 
+private UserServiceImpl userService;
+userService = new UserServiceImpl(LoginActivity.this);
+
+*. From do in background save objects in db
+                User user = new User();
+                user.setUid(new Random().nextInt());
+                user.setEmail(mEmail);
+                user.setPassword(mPassword);
+                user.setFirstName("First Name");
+                user.setLastName("Last Name");
+                userService.insertAll(user);
+                users = userService.getAll();
+                
+*. Simple method to get db in background thread and showing data on UI-
+ private void getUsersFromDB() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                users = userService.getAll();
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void agentsCount) {
+                usersTextView.setText("Users \n\n " + users);
+            }
+        }.execute();
+        
+
+                
 # https://developer.android.com/images/training/data-storage/room_architecture.png
 
 
